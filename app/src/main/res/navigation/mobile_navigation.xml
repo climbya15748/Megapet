@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.rightdirection.megapet.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_memberDashboard"
+        android:name="com.rightdirection.megapet.ui.member.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_member_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_blankFragment"
+            app:destination="@id/blankFragment" />
+        <action
+            android:id="@+id/action_navigation_member_dashboard_to_registerFragment"
+            app:destination="@id/navigation_register" />
+        <action
+            android:id="@+id/action_navigation_member_dashboard_to_myAccountFragment"
+            app:destination="@id/navigation_myAccount" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.rightdirection.megapet.ui.discovery.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_discover" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.rightdirection.megapet.ui.discovery.BlankFragment"
+        android:label="blank_fragment"
+        tools:layout="@layout/blank_fragment" />
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.rightdirection.megapet.ui.menu.MenuFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/menu_fragment" >
+        <action
+            android:id="@+id/action_navigation_menu_to_navigation_dashboard"
+            app:destination="@id/navigation_memberDashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_memberPaymentScanFragment"
+        android:name="com.rightdirection.megapet.ui.member.MemberPaymentScanFragment"
+        android:label="@string/title_payment"
+        tools:layout="@layout/member_payment_scan_fragment" />
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.rightdirection.megapet.ui.member.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/navigation_myAccount"
+        android:name="com.rightdirection.megapet.ui.member.MyAccountFragment"
+        android:label="my_account_fragment"
+        tools:layout="@layout/my_account_fragment" >
+        <action
+            android:id="@+id/action_navigation_myAccount_to_editAccountInfoFragment"
+            app:destination="@id/navigation_editAccountInfoFragment" />
+        <action
+            android:id="@+id/action_navigation_myAccount_to_editPasswordFragment"
+            app:destination="@id/navigation_editPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_editAccountInfoFragment"
+        android:name="com.rightdirection.megapet.ui.member.EditAccountInfoFragment"
+        android:label="fragment_edit_account_info"
+        tools:layout="@layout/fragment_edit_account_info" />
+    <fragment
+        android:id="@+id/navigation_editPasswordFragment"
+        android:name="com.rightdirection.megapet.ui.member.EditPasswordFragment"
+        android:label="EditPasswordFragment" />
+</navigation>

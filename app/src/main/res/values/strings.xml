@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Megapet</string>
+    <string name="title_home">主頁</string>
+    <string name="title_dashboard">會員</string>
+    <string name="title_notifications">探索</string>
+    <string name="title_payment">積分</string>
+    <string name="title_menu">更多</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_account_delivery_address">FLAT/RM 1309 BLK B2 13/F \n
+        YAU TONG IND CITY 九龍城,\n
+        - 中國香港特別行政區 \n
+        T: 93440729</string>
+
+<!--    login-->
+    <string name="login_email_hint">電郵</string>
+    <string name="login_password_hint">密碼</string>
+<!--    myaccount-->
+    <string name="dashboard_welcome_title">歡迎回來!</string>
+    <string name="dashboard_welcome_desc">使用您的電子郵件地址登錄</string>
+<!--register-->
+    <string name="register_welcome_title">你好!</string>
+    <string name="register_welcome_desc">立即成為會員盡享現有禮遇</string>
+    <string name="register_email_hint">電郵</string>
+    <string name="register_firstname_hint">名稱</string>
+    <string name="register_lastname_hint">姓氏</string>
+    <string name="register_password_hint">密碼</string>
+    <string name="register_confirm_password_hint">確認密碼</string>
+    <string name="register_btn_text"><u>按此立即登記成為會員</u></string>
+    <string name="forget_password_text"><u>忘記密碼?</u></string>
+
+</resources>
