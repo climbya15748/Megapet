@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="48dp">
+    android:layout_marginVertical="36dp">
 
     <ImageView
         android:id="@+id/menuItemIcon"
@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingVertical="24dp"
+        android:layout_marginVertical="12dp"
+        android:paddingVertical="8dp"
         android:layout_weight="1">
 
         <TextView
@@ -25,12 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="MY ACCOUNT"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:gravity="bottom"
+            android:text="MY ACCOUNT"
             android:textColor="@color/black"
-            />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/menuItemDesc"

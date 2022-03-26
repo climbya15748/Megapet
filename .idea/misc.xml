@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/activity_splash.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/forget_password_fragment.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_discover.xml" value="0.2269021739130435" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_edit_account_info.xml" value="0.33" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_edit_password.xml" value="0.2346014492753623" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_home.xml" value="0.15898825654923215" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_member_dashboard.xml" value="0.33" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_member_point_history.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_register.xml" value="0.27219202898550726" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_register_selection.xml" value="0.3197463768115942" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_sms_auth.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/fragment_sms_verify_member.xml" value="0.31521739130434784" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/member_card_fragment.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/menu_fragment.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/menu_list_item_layout.xml" value="0.22554347826086957" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/my_account_fragment.xml" value="0.2346014492753623" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/layout/point_history_list_item_layout.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/hihig/AndroidStudioProjects/Megapet/app/src/main/res/menu/bottom_nav_menu.xml" value="0.32592592592592595" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

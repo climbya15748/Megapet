@@ -6,12 +6,13 @@
     <data>
         <variable
             name="accountInfo"
-            type="com.rightdirection.megapet.model.Member" />
+            type="com.rightdirection.megapet.model.member.Member" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_main_repeat_2"
         tools:context=".ui.member.EditAccountInfoFragment" >
 
         <TextView
@@ -19,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="修改賬戶信息"
+            android:text="@string/edit_info_title"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="24sp"
@@ -47,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="姓氏"
+            android:text="@string/edit_info_lastname_hint"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sperate_line1" />
 
@@ -59,8 +61,10 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@{accountInfo.lastname}"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_lastname_title" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_lastname_title"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/edit_firstname_title"
@@ -68,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="名稱"
+            android:text="@string/edit_info_firstname_hint"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_lastname_input" />
 
@@ -81,20 +85,140 @@
             android:inputType="textPersonName"
             android:text="@{accountInfo.firstname}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_firstname_title" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_firstname_title"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <View
+            android:id="@+id/sperate_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_firstname_input" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_phone_verification_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/sperate_line2"
+            app:layout_constraintTop_toBottomOf="@+id/sperate_line2"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/edit_phone_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="此帳戶的手提電話號碼還未經驗證，請輸入正確的手提電話號碼，並獲取驗證碼短訊，然後進行驗證。"
+                android:textColor="@color/megapet_logo_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/edit_phone_verification_layout"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toStartOf="@+id/edit_phone_verification_layout"
+                app:layout_constraintTop_toTopOf="@+id/edit_phone_verification_layout" />
+
+            <TextView
+                android:id="@+id/edit_phone_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/edit_info_phone_hint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_hint" />
+
+            <EditText
+                android:id="@+id/edit_phone_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:text="@{accountInfo.phone}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_title"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/get_member_otp_btn"
+                style="@style/large_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="0.5"
+                android:text="獲得驗証碼"
+                app:layout_constraintStart_toEndOf="@+id/edit_phone_input"
+                app:layout_constraintTop_toTopOf="@+id/edit_phone_input" />
+
+            <TextView
+                android:id="@+id/edit_otp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="驗證碼"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_phone_input" />
+
+            <EditText
+                android:id="@+id/edit_otp_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="@+id/edit_otp_title"
+                app:layout_constraintTop_toBottomOf="@+id/edit_otp_title" />
+
+            <Button
+                android:id="@+id/verify_otp_btn"
+                style="@style/large_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="0.5"
+                android:text="驗証"
+                app:layout_constraintStart_toEndOf="@+id/edit_otp_input"
+                app:layout_constraintTop_toTopOf="@+id/edit_otp_input" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/edit_account_info_submit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            style="@style/large_button"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="儲存"
-            android:textSize="20sp"
+            android:text="@string/edit_info_submit_btn_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_phone_verification_layout" />
+
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_firstname_input" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

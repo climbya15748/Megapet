@@ -5,13 +5,18 @@
     <!-- id = fragment's id = nav id -->
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_baseline_home_24_white"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_memberPaymentScanFragment"
-        android:icon="@drawable/ic_baseline_monetization_on_24"
+        android:icon="@drawable/ic_baseline_monetization_on_24_white"
         android:title="@string/title_payment" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
 
     <item
         android:id="@+id/navigation_notifications"
@@ -20,7 +25,7 @@
 
     <item
         android:id="@+id/navigation_menu"
-        android:icon="@drawable/ic_baseline_more_horiz_24"
+        android:icon="@drawable/ic_baseline_more_horiz_24_white"
         android:title="@string/title_menu" />
 
 </menu>

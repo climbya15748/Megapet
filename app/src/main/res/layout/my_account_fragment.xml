@@ -6,12 +6,13 @@
     <data>
         <variable
             name="accountInfo"
-            type="com.rightdirection.megapet.model.Member" />
+            type="com.rightdirection.megapet.model.member.Member" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_main_repeat_2"
         tools:context=".ui.member.MyAccountFragment">
 
         <TextView
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="賬戶信息"
+            android:text="@string/my_account_title"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="我的賬戶"
+            android:text="@string/my_account_top_title"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@{accountInfo.firstname+accountInfo.lastname}"
+            android:text="@{accountInfo.firstname+' '+accountInfo.lastname}"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/account_info_title"
@@ -82,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="當前積分餘額:"
+            android:text="@string/my_account_point_bal_title"
             app:layout_constraintStart_toStartOf="@+id/member_email"
             app:layout_constraintTop_toBottomOf="@+id/member_email" />
 
@@ -98,13 +99,36 @@
             tools:text="0.00" />
 
         <TextView
+            android:id="@+id/phone_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/my_account_phone_title"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/point_bal_title"
+            app:layout_constraintTop_toBottomOf="@+id/point_bal_title" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:text="@{String.valueOf(accountInfo.phone)}"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/phone_title"
+            app:layout_constraintTop_toBottomOf="@+id/point_bal"
+            tools:text="93440729" />
+
+        <TextView
             android:id="@+id/point_earned_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="總Ecoupon:"
-            app:layout_constraintStart_toStartOf="@+id/point_bal_title"
-            app:layout_constraintTop_toBottomOf="@+id/point_bal_title" />
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/phone_title"
+            app:layout_constraintTop_toBottomOf="@+id/phone_title" />
 
         <TextView
             android:id="@+id/point_earned"
@@ -113,8 +137,9 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="8dp"
             android:text="@{String.valueOf(accountInfo.point_earned)}"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/point_earned_title"
-            app:layout_constraintTop_toBottomOf="@+id/point_bal"
+            app:layout_constraintTop_toBottomOf="@+id/phone"
             tools:text="0.00" />
 
         <TextView
@@ -123,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="總使用:"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/point_earned_title"
             app:layout_constraintTop_toBottomOf="@+id/point_earned_title" />
 
@@ -133,6 +159,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="8dp"
             android:text="@{String.valueOf(accountInfo.point_redeemed)}"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/point_redeemed_title"
             app:layout_constraintTop_toBottomOf="@+id/point_earned"
             tools:text="0.00" />
@@ -143,6 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="已過期:"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/point_redeemed_title"
             app:layout_constraintTop_toBottomOf="@+id/point_redeemed_title" />
 
@@ -154,6 +182,7 @@
             android:layout_marginTop="8dp"
             android:text="0.0"
             tools:text="0.0"
+            android:visibility="gone"
             app:layout_constraintStart_toEndOf="@+id/point_expired_title"
             app:layout_constraintTop_toBottomOf="@+id/point_redeemed" />
 
@@ -189,6 +218,7 @@
             android:text="預設送貨地址"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sperate_line2" />
 
@@ -199,6 +229,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="@string/my_account_delivery_address"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/delivery_address_title"
             tools:text="@string/my_account_delivery_address" />
@@ -210,6 +241,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_edit_36"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sperate_line2" />
 
@@ -231,7 +263,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="更改密碼"
+            android:text="@string/my_account_edit_password_title"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -260,6 +292,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_title" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

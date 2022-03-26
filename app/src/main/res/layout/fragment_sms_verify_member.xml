@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sms.SmsVerifyMemberFragment">
+
+    <TextView
+        android:id="@+id/sms_verify_member_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="會員認證"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sms_verify_member_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="你的手提電話還沒有認証，請獲得並輸入驗證碼。"
+        app:layout_constraintStart_toStartOf="@+id/sms_verify_member_title"
+        app:layout_constraintTop_toBottomOf="@+id/sms_verify_member_title" />
+
+    <LinearLayout
+        android:id="@+id/get_member_verify_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sms_verify_member_desc">
+
+        <EditText
+            android:id="@+id/sms_display_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="93440729"
+            android:focusable="false"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/get_member_otp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="0.5"
+            style="@style/large_button"
+            android:text="獲得驗証碼" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/verify_member_otp_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_member_verify_layout">
+
+        <EditText
+            android:id="@+id/verify_member_otp_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="在此輸入驗證碼"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/verify_otp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="0.5"
+            style="@style/large_button"
+            android:text="驗証" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
