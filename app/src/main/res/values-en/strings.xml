@@ -56,6 +56,11 @@
     <string name="edit_info_failure_message_desc">Name can not be empty</string>
     <string name="edit_info_submit_btn_text">Save</string>
     <string name="edit_info_successful">Edit Account Info Successful</string>
+        <string name="send_otp_request_successful">Verify Code is sent to your phone</string>
+        <string name="send_otp_request_error_403">Excess hit rate, please try again after 15 minutes</string>
+        <string name="send_otp_request_error_503">Verify Code cannot be sent</string>
+        <string name="verify_otp_successful">Verification Success</string>
+        <string name="verify_otp_error">Verification failed, please check the verification code</string>
     <!--edit password-->
     <string name="edit_password_title">Edit Password</string>
     <string name="edit_password_current_password_hint">Current Password</string>

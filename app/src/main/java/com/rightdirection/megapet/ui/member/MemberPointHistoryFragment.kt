@@ -56,6 +56,10 @@ class MemberPointHistoryFragment : Fragment() {
                                 response.body()?.let { PointHistoryAdapter(requireActivity(), it) }
                         }
                     }else{
+                        if (response.code().toString() == "401"){
+                            navController.navigate(R.id.navigation_editAccountInfoFragment)
+                        }
+
                         Log.e("Error:",response.code().toString())
                         Log.e("Error:",response.body().toString())
                     }

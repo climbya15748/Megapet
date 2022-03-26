@@ -1,9 +1,6 @@
 package com.rightdirection.megapet.api
 
-import com.rightdirection.megapet.model.member.Member
-import com.rightdirection.megapet.model.member.ObjEditPassword
-import com.rightdirection.megapet.model.member.ObjQRString
-import com.rightdirection.megapet.model.member.PointHistory
+import com.rightdirection.megapet.model.member.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -55,6 +52,17 @@ interface RdApi {
     @POST("member/forget-password")
     suspend fun forgetPassword(
         @Body forgetPasswordDetail: Member
+    ): Response<Member>
+
+    @POST("member/send-otp")
+    suspend fun postOtpRequest(
+        @Header("Authorization") jwt:String
+    ): Response<Member>
+
+    @POST("member/verify-otp")
+    suspend fun postOtpVerification(
+        @Header("Authorization") jwt:String,
+        @Body otp: ObjOtp
     ): Response<Member>
 
 

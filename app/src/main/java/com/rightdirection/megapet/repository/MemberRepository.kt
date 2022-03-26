@@ -1,9 +1,6 @@
 package com.rightdirection.megapet.repository
 
-import com.rightdirection.megapet.model.member.Member
-import com.rightdirection.megapet.model.member.ObjEditPassword
-import com.rightdirection.megapet.model.member.ObjQRString
-import com.rightdirection.megapet.model.member.PointHistory
+import com.rightdirection.megapet.model.member.*
 import retrofit2.Response
 
 interface MemberRepository {
@@ -29,5 +26,9 @@ interface MemberRepository {
     suspend fun forgetPassword(forgetPasswordDetail:Member):Response<Member>
 
     suspend fun saveLocalePreference(locale:String)
+
+    suspend fun postOtpRequest(jwt: String):Response<Member>
+
+    suspend fun postOtpVerification(jwt:String, otp:ObjOtp ):Response<Member>
 
 }

@@ -1,10 +1,7 @@
 package com.rightdirection.megapet.repository
 
 import com.rightdirection.megapet.api.RdApi
-import com.rightdirection.megapet.model.member.Member
-import com.rightdirection.megapet.model.member.ObjEditPassword
-import com.rightdirection.megapet.model.member.ObjQRString
-import com.rightdirection.megapet.model.member.PointHistory
+import com.rightdirection.megapet.model.member.*
 import com.rightdirection.megapet.preferences.PreferenceManager
 import retrofit2.Response
 
@@ -56,6 +53,14 @@ class MemberRepositoryImpl(
 
     override suspend fun saveLocalePreference(locale:String){
         preference.saveLocaleSetting(locale)
+    }
+
+    override suspend fun postOtpRequest(jwt: String): Response<Member> {
+        return api.postOtpRequest(jwt)
+    }
+
+    override suspend fun postOtpVerification(jwt: String, otp: ObjOtp): Response<Member> {
+        return api.postOtpVerification(jwt,otp)
     }
 
 

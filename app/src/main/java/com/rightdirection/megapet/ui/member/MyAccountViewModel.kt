@@ -4,6 +4,7 @@ package com.rightdirection.megapet.ui.member
 import androidx.lifecycle.*
 import com.rightdirection.megapet.model.member.Member
 import com.rightdirection.megapet.model.member.ObjEditPassword
+import com.rightdirection.megapet.model.member.ObjOtp
 import com.rightdirection.megapet.model.member.ObjQRString
 import com.rightdirection.megapet.preferences.PreferenceManager
 import com.rightdirection.megapet.repository.MemberRepository
@@ -30,6 +31,9 @@ class MyAccountViewModel @Inject constructor(
     val updatePasswordResponse:MutableLiveData<Response<Member>> = MutableLiveData()
 
     val qrStringResponse:MutableLiveData<Response<ObjQRString>> = MutableLiveData()
+
+    val sendOtpRequestResponse:MutableLiveData<Response<Member>> = MutableLiveData()
+    val sendOtpVerificationResponse:MutableLiveData<Response<Member>> = MutableLiveData()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
@@ -75,6 +79,28 @@ class MyAccountViewModel @Inject constructor(
                 preference.jwtFlow.collect { value: String ->
                     val result = repository.getQRString(value)
                     qrStringResponse.value = result
+                }
+            }
+        }
+    }
+
+    fun postOtpRequest(){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            withContext(Dispatchers.Main) {
+                preference.jwtFlow.collect { value: String ->
+                    val result = repository.postOtpRequest(value)
+                    sendOtpRequestResponse.value = result
+                }
+            }
+        }
+    }
+
+    fun postOtpVerification(otp:ObjOtp){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            withContext(Dispatchers.Main) {
+                preference.jwtFlow.collect { value: String ->
+                    val result = repository.postOtpVerification(value,otp)
+                    sendOtpVerificationResponse.value = result
                 }
             }
         }

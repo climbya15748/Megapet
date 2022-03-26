@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rightdirection.megapet.R
 import com.rightdirection.megapet.databinding.FragmentEditAccountInfoBinding
 import com.rightdirection.megapet.model.member.Member
+import com.rightdirection.megapet.model.member.ObjOtp
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -62,6 +63,32 @@ class EditAccountInfoFragment : Fragment() {
             binding.progressBar.visibility = View.INVISIBLE
         })
 
+        viewModel.sendOtpRequestResponse.observe(viewLifecycleOwner,{
+            if (it.isSuccessful){
+                Toast.makeText(activity, resources.getString(R.string.send_otp_request_successful),Toast.LENGTH_LONG).show()
+            }else{
+                if (it.code().toString() == "403"){
+                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_403),Toast.LENGTH_LONG).show()
+                }
+                if (it.code().toString() == "503"){
+                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_503),Toast.LENGTH_LONG).show()
+                }
+            }
+            binding.progressBar.visibility = View.INVISIBLE
+        })
+
+        viewModel.sendOtpVerificationResponse.observe(viewLifecycleOwner,{
+            if (it.isSuccessful){
+                Toast.makeText(activity, resources.getString(R.string.verify_otp_successful),Toast.LENGTH_LONG).show()
+                navController.navigate(R.id.action_navigation_editAccountInfoFragment_to_navigation_myAccount)
+            }else{
+                if (it.code().toString() == "400"){
+                    Toast.makeText(activity, resources.getString(R.string.verify_otp_error),Toast.LENGTH_LONG).show()
+                }
+            }
+            binding.progressBar.visibility = View.INVISIBLE
+        })
+
         //submit btn
 
         binding.editAccountInfoSubmitBtn.setOnClickListener {
@@ -88,9 +115,22 @@ class EditAccountInfoFragment : Fragment() {
                 )
 
                 viewModel.postUpdateMemberInfo(form)
-
             }
+        }
 
+        binding.getMemberOtpBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.postOtpRequest()
+        }
+
+        binding.verifyOtpBtn.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
+            if (binding.editOtpInput.text.isNullOrEmpty()){
+                binding.editOtpInput.error = ""
+            }else{
+                val otp:ObjOtp = ObjOtp(binding.editOtpInput.text.toString())
+                viewModel.postOtpVerification(otp)
+            }
         }
 
         return binding.root

@@ -56,6 +56,11 @@
     <string name="edit_info_failure_message_desc">姓氏或名稱不能為空</string>
     <string name="edit_info_submit_btn_text">儲存</string>
     <string name="edit_info_successful">修改賬戶信息成功</string>
+        <string name="send_otp_request_successful">驗證碼已傳送至你的電話</string>
+        <string name="send_otp_request_error_403">超出驗證次數上限，請在15分鐘再試</string>
+        <string name="send_otp_request_error_503">驗證碼已傳送失敗</string>
+        <string name="verify_otp_successful">驗證成功</string>
+        <string name="verify_otp_error">驗證失敗，請檢查驗證碼是否正確</string>
     <!--edit password-->
     <string name="edit_password_title">更改密碼</string>
     <string name="edit_password_current_password_hint">現時密碼</string>
