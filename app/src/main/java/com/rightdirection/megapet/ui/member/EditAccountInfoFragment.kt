@@ -40,8 +40,13 @@ class EditAccountInfoFragment : Fragment() {
         viewModel.memberResponse.observe(viewLifecycleOwner,{memberResponse->
             if (memberResponse.isSuccessful){
                 binding.accountInfo = memberResponse.body()
+                //if phone not verified, show phone layout
                 if (binding.accountInfo!!.is_phone_valid == "0"){
                     binding.editPhoneVerificationLayout.visibility = View.VISIBLE
+                    //if sign up by phone , cannot change phone number to prevent duplicate
+                    if (binding.accountInfo!!.sign_up_by == "PHONE"){
+                        binding.editPhoneInput.isFocusable = false
+                    }
                 }
             }else{
                 Log.e("Error:",memberResponse.code().toString())
@@ -67,6 +72,9 @@ class EditAccountInfoFragment : Fragment() {
             if (it.isSuccessful){
                 Toast.makeText(activity, resources.getString(R.string.send_otp_request_successful),Toast.LENGTH_LONG).show()
             }else{
+                if (it.code().toString() == "400"){
+                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_400),Toast.LENGTH_LONG).show()
+                }
                 if (it.code().toString() == "403"){
                     Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_403),Toast.LENGTH_LONG).show()
                 }
@@ -124,10 +132,10 @@ class EditAccountInfoFragment : Fragment() {
         }
 
         binding.verifyOtpBtn.setOnClickListener {
-            binding.progressBar.visibility = View.VISIBLE
             if (binding.editOtpInput.text.isNullOrEmpty()){
                 binding.editOtpInput.error = ""
             }else{
+                binding.progressBar.visibility = View.VISIBLE
                 val otp:ObjOtp = ObjOtp(binding.editOtpInput.text.toString())
                 viewModel.postOtpVerification(otp)
             }

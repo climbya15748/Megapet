@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="此帳戶的手提電話號碼還未經驗證，請輸入正確的手提電話號碼，並獲取驗證碼短訊，然後進行驗證。"
+                android:text="@string/otp_section_title"
                 android:textColor="@color/megapet_logo_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="0.5"
-                android:text="獲得驗証碼"
+                android:text="@string/get_otp_btn"
                 app:layout_constraintStart_toEndOf="@+id/edit_phone_input"
                 app:layout_constraintTop_toTopOf="@+id/edit_phone_input" />
 
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="驗證碼"
+                android:text="@string/verify_otp_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_phone_input" />
 
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="0.5"
-                android:text="驗証"
+                android:text="@string/verify_otp_btn"
                 app:layout_constraintStart_toEndOf="@+id/edit_otp_input"
                 app:layout_constraintTop_toTopOf="@+id/edit_otp_input" />
 

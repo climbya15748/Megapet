@@ -56,7 +56,7 @@ class ForgetPasswordFragment : Fragment() {
         binding.forgetPasswordSubmitBtn.setOnClickListener {
 
             if (binding.radioForgetEmail.isChecked){
-                if (isEmailEmpty()){
+                if (!isEmailValid()){
                     binding.emailForgetPasswordInputLayout.isErrorEnabled = true
                     binding.emailForgetPasswordInputLayout.error=getString(R.string.login_email_error_hint)
                 }else{
@@ -67,7 +67,7 @@ class ForgetPasswordFragment : Fragment() {
             }
 
             if (binding.radioForgetPhone.isChecked){
-                if (isPhoneEmpty()){
+                if (!isPhoneValid()){
                     binding.phoneForgetPasswordInputLayout.isErrorEnabled = true
                     binding.phoneForgetPasswordInputLayout.error=getString(R.string.register_phone_error_hint)
                 }else{
@@ -81,14 +81,14 @@ class ForgetPasswordFragment : Fragment() {
         viewModel.forgetPasswordResponse.observe(viewLifecycleOwner,{ it->
             if (it.isSuccessful){
                 MaterialAlertDialogBuilder(requireContext())
-                    .setMessage("重設密碼的指示已寄往你的郵箱")
+                    .setMessage(getString(R.string.forget_password_successful))
                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
                         // Respond to positive button press
                     }.show()
                 navController.navigate(R.id.action_navigation_forgetPasswordFragment_to_navigation_memberDashboard)
             }else{
                 MaterialAlertDialogBuilder(requireContext())
-                    .setMessage("網絡錯誤 .forget-password 500")
+                    .setMessage("網絡錯誤 Network Error .forget-password 500")
                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
                         // Respond to positive button press
                     }.show()
@@ -112,12 +112,14 @@ class ForgetPasswordFragment : Fragment() {
     }
 
 
-    private fun isEmailEmpty():Boolean {
-        return  binding.emailForgetPasswordInput.text.isNullOrEmpty()
+    private fun isEmailValid():Boolean {
+        val emailPattern = android.util.Patterns.EMAIL_ADDRESS
+        val text = binding.emailForgetPasswordInput.text
+        return  !text.isNullOrEmpty() && text.toString().length <=50 && emailPattern.matcher(text.toString()).matches()
     }
 
-    private fun isPhoneEmpty():Boolean {
-        return  binding.phoneForgetPasswordInput.text.isNullOrEmpty()
+    private fun isPhoneValid():Boolean {
+        return  !binding.phoneForgetPasswordInput.text.isNullOrEmpty() && binding.phoneForgetPasswordInput.text.toString().length >7
     }
 
     private fun sendRequestByEmail(){

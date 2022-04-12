@@ -57,6 +57,7 @@
     <string name="edit_info_submit_btn_text">Save</string>
     <string name="edit_info_successful">Edit Account Info Successful</string>
         <string name="send_otp_request_successful">Verify Code is sent to your phone</string>
+        <string name="send_otp_request_error_400">This phone number is being used</string>
         <string name="send_otp_request_error_403">Excess hit rate, please try again after 15 minutes</string>
         <string name="send_otp_request_error_503">Verify Code cannot be sent</string>
         <string name="verify_otp_successful">Verification Success</string>
@@ -108,12 +109,14 @@
 
     <!-- forgot password -->
     <string name="forget_password_title">Forget Password</string>
-    <string name="forget_password_desc">Enter your registered Email or Phone number, we will send the password reset instruction to your email address</string>
+    <string name="forget_password_desc">Enter your registered Email or Phone number, we will send the password reset instruction to you</string>
     <string name="forget_password_submit_btn">Submit</string>
     <string name="forget_password_email_radio_text">Send by Email</string>
     <string name="forget_password_phone_radio_text">Send by SMS</string>
     <string name="forget_password_email_hint">Email</string>
     <string name="forget_password_phone_hint">Phone</string>
+        <string name="forget_password_successful">we sent the password reset instruction to you</string>
+
 
     <!-- point history -->
     <string name="member_point_history_title">Available Ecoupon</string>
@@ -164,6 +167,10 @@
     <string name="forget_password_or_desc">or</string>
     <string name="register_selection_phone_hint">*Sign Up by Phone required SMS verification</string>
     <string name="forget_password_phone_required_text">*Available only verified phone number</string>
+    <string name="get_otp_btn">Get OTP</string>
+    <string name="verify_otp_title">OTP</string>
+    <string name="verify_otp_btn">Verify OTP</string>
+    <string name="otp_section_title">This account is not verified by SMS, please get the One Time Password and process SMS verification</string>
 
 
 </resources>

@@ -56,7 +56,7 @@ class MemberCardFragment : Fragment() {
                 myAccountViewModel.memberResponse.observe(viewLifecycleOwner, { memberResponse->
                     if (memberResponse.isSuccessful){
                         binding.accountInfo = memberResponse.body()
-                        if (binding.accountInfo!!.is_phone_valid=="0"){
+                        if (binding.accountInfo!!.is_phone_valid=="0" && binding.accountInfo!!.sign_up_by =="PHONE"){
                             navController.navigate(R.id.navigation_editAccountInfoFragment)
                         }
                     }else{
