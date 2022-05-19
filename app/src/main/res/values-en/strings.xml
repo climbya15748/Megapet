@@ -61,7 +61,7 @@
         <string name="send_otp_request_error_403">Excess hit rate, please try again after 15 minutes</string>
         <string name="send_otp_request_error_503">Verify Code cannot be sent</string>
         <string name="verify_otp_successful">Verification Success</string>
-        <string name="verify_otp_error">Verification failed, please check the verification code</string>
+        <string name="verify_otp_error">Verification failed, incorrect or expired code</string>
     <!--edit password-->
     <string name="edit_password_title">Edit Password</string>
     <string name="edit_password_current_password_hint">Current Password</string>
@@ -168,9 +168,10 @@
     <string name="register_selection_phone_hint">*Sign Up by Phone required SMS verification</string>
     <string name="forget_password_phone_required_text">*Available only verified phone number</string>
     <string name="get_otp_btn">Get OTP</string>
-    <string name="verify_otp_title">OTP</string>
+    <string name="verify_otp_title">OTP*</string>
     <string name="verify_otp_btn">Verify OTP</string>
     <string name="otp_section_title">This account is not verified by SMS, please get the One Time Password and process SMS verification</string>
+    <string name="register_otp_error_hint">Please input OTP</string>
 
 
 </resources>

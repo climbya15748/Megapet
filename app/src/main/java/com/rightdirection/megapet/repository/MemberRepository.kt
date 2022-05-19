@@ -31,4 +31,6 @@ interface MemberRepository {
 
     suspend fun postOtpVerification(jwt:String, otp:ObjOtp ):Response<Member>
 
+    suspend fun postRegOtpRequest(phone: ObjPhone):Response<Member>
+
 }

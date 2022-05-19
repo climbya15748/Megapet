@@ -65,6 +65,11 @@ interface RdApi {
         @Body otp: ObjOtp
     ): Response<Member>
 
+    @POST("member/send-otp-via-phone")
+    suspend fun postRegOtpReqeust(
+        @Body phone: ObjPhone
+    ): Response<Member>
+
 
 
 

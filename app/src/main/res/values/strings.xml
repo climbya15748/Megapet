@@ -59,9 +59,9 @@
         <string name="send_otp_request_successful">驗證碼已傳送至你的電話</string>
         <string name="send_otp_request_error_400">此手提電話已被使用</string>
         <string name="send_otp_request_error_403">超出驗證次數上限，請在15分鐘再試</string>
-        <string name="send_otp_request_error_503">驗證碼已傳送失敗</string>
+        <string name="send_otp_request_error_503">驗證碼傳送失敗</string>
         <string name="verify_otp_successful">驗證成功</string>
-        <string name="verify_otp_error">驗證失敗，請檢查驗證碼是否正確</string>
+        <string name="verify_otp_error">驗證失敗，驗證碼不正確或已過期</string>
     <!--edit password-->
     <string name="edit_password_title">更改密碼</string>
     <string name="edit_password_current_password_hint">現時密碼</string>
@@ -174,9 +174,9 @@
     <string name="forget_password_or_desc">或</string>
 
     <string name="get_otp_btn">獲得驗証碼</string>
-    <string name="verify_otp_title">驗證碼</string>
+    <string name="verify_otp_title">驗證碼*</string>
     <string name="verify_otp_btn">驗証</string>
     <string name="otp_section_title">此帳戶的手提電話號碼還未經驗證，請輸入正確的手提電話號碼，並獲取驗證碼短訊，然後進行驗證。</string>
-
+    <string name="register_otp_error_hint">請輸入驗證碼</string>
 
 </resources>

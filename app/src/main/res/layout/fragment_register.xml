@@ -171,7 +171,51 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/register_phone_verification_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lastname_register_input_layout"
+                    tools:visibility="visible">
 
+
+                    <Button
+                        android:id="@+id/get_member_otp_btn"
+                        style="@style/large_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
+                        android:text="@string/get_otp_btn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/otp_register_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/get_member_otp_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/get_member_otp_btn">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/otp_register_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:ems="10"
+                            android:hint="@string/verify_otp_title"
+                            android:inputType="textPersonName" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <CheckBox
                     android:id="@+id/register_agree_checkbox"
@@ -183,7 +227,7 @@
                     android:focusable="true"
                     app:layout_constraintBottom_toTopOf="@+id/register_submit_btn"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/firstname_register_input_layout" />
+                    app:layout_constraintTop_toBottomOf="@+id/register_phone_verification_layout" />
 
                 <TextView
                     android:id="@+id/register_agree_text"

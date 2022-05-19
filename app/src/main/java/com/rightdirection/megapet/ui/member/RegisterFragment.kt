@@ -22,6 +22,7 @@ import com.rightdirection.megapet.R
 import com.rightdirection.megapet.R.string.*
 import com.rightdirection.megapet.databinding.FragmentRegisterBinding
 import com.rightdirection.megapet.model.member.Member
+import com.rightdirection.megapet.model.member.ObjPhone
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,6 +51,7 @@ class RegisterFragment : Fragment() {
             binding.phoneRegisterInputLayout.hint = getString(register_phone_hint_optional)
         }
         if (signUpBy == "PHONE"){
+            binding.registerPhoneVerificationLayout.visibility = View.VISIBLE
             binding.emailRegisterInputLayout.hint = getString(register_email_hint_optional)
         }
 
@@ -59,25 +61,23 @@ class RegisterFragment : Fragment() {
         binding.emailRegisterInput.doOnTextChanged { text, _, _, _ ->
             isEmailValid(text)
         }
-
         binding.passwordRegisterInput.doOnTextChanged {text, _, _, _ ->
             isPasswordValid(text)
         }
-
         binding.confirmPasswordRegisterInput.doOnTextChanged {text, _, _, _ ->
             isConfirmPasswordValid(text)
         }
-
         binding.firstnameRegisterInput.doOnTextChanged {text, _, _, _ ->
             isFirstnameValid(text)
         }
-
         binding.lastnameRegisterInput.doOnTextChanged {text, _, _, _ ->
             isLastnameValid(text)
         }
-
         binding.phoneRegisterInput.doOnTextChanged {text, _, _, _ ->
             isPhoneValid(text)
+        }
+        binding.otpRegisterInput.doOnTextChanged {text, _, _, _ ->
+            isOtpValid(text)
         }
         binding.registerAgreeCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
@@ -87,6 +87,12 @@ class RegisterFragment : Fragment() {
         }
 
 
+        binding.getMemberOtpBtn.setOnClickListener {
+            val isPhoneValid = isPhoneValid(binding.phoneRegisterInput.text)
+            if (isPhoneValid){
+                getOtpViaPhone()
+            }
+        }
 
 
         binding.registerSubmitBtn.setOnClickListener {
@@ -98,6 +104,7 @@ class RegisterFragment : Fragment() {
             val isLastnameValid = isLastnameValid(binding.lastnameRegisterInput.text)
             //val isPhoneValid = isPhoneValid(binding.phoneRegisterInput.text)
             val isCheckboxChecked = isCheckboxChecked()
+            val isOtpValid = isOtpValid(binding.otpRegisterInput.text)
 
             if (signUpBy == "EMAIL"){
                 if (isEmailValid(binding.emailRegisterInput.text) && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked ){
@@ -105,12 +112,36 @@ class RegisterFragment : Fragment() {
                 }
             }
             if (signUpBy == "PHONE"){
-                if (isPhoneValid(binding.phoneRegisterInput.text) && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked ){
+                if (isPhoneValid(binding.phoneRegisterInput.text) && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked && isOtpValid ){
                     signUp(signUpBy)
                 }
             }
 
         }
+
+        viewModel.regOtpResponse.observe(viewLifecycleOwner, { response ->
+            if (response.isSuccessful){
+                val toast = Toast.makeText(activity,getString(send_otp_request_successful),Toast.LENGTH_LONG)
+                toast.show()
+            }else{
+                Log.d("response body:",response.body().toString())
+                when (response.code().toString()){
+                    "400"->{
+                        binding.phoneRegisterInputLayout.isErrorEnabled = true
+                        binding.phoneRegisterInputLayout.error = getString(send_otp_request_error_400)
+                    }
+                    "403"->{
+                        val toast = Toast.makeText(activity,getString(send_otp_request_error_403),Toast.LENGTH_LONG)
+                        toast.show()
+                    }
+                    "503"->{
+                        val toast = Toast.makeText(activity,getString(send_otp_request_error_503),Toast.LENGTH_LONG)
+                        toast.show()
+                    }
+                }
+            }
+            binding.progressBar.visibility = View.INVISIBLE
+        })
 
         viewModel.registrationResponse.observe(viewLifecycleOwner, { response ->
             if(response.isSuccessful){
@@ -129,6 +160,10 @@ class RegisterFragment : Fragment() {
                     "401"->{
                         binding.phoneRegisterInputLayout.isErrorEnabled = true
                         binding.phoneRegisterInputLayout.error = getString(register_error_401)
+                    }
+                    "403"->{
+                        binding.otpRegisterInputLayout.isErrorEnabled = true
+                        binding.otpRegisterInputLayout.error = getString(verify_otp_error)
                     }
                     "503"->{
                         val toast = Toast.makeText(activity,getString(register_error_503),Toast.LENGTH_LONG)
@@ -166,6 +201,12 @@ class RegisterFragment : Fragment() {
     }
 
 
+    private fun getOtpViaPhone(){
+        binding.progressBar.visibility = View.VISIBLE
+        val body = ObjPhone(binding.phoneRegisterInput.text.toString())
+        println("send otp to : $body")
+        viewModel.postRegOtpRequest(body)
+    }
 
     private fun signUp(signUpBy:String?){
         //start loading animation
@@ -179,7 +220,8 @@ class RegisterFragment : Fragment() {
             0.0,
             0.0,
             binding.phoneRegisterInput.text.toString(),null,null,
-            signUpBy
+            signUpBy,
+            binding.otpRegisterInput.text.toString()
         )
         Log.d("signUP:","sending form....")
         viewModel.postRegister(form)
@@ -258,12 +300,26 @@ class RegisterFragment : Fragment() {
 
     private fun isPhoneValid(text:CharSequence?):Boolean{
 
-        return if(!text.isNullOrEmpty() && text.length >7) {
+        Log.d("phone:",text?.length.toString())
+        return if(!text.isNullOrEmpty() && text.length == 8) {
             binding.phoneRegisterInputLayout.isErrorEnabled = false
             true
         }else{
             binding.phoneRegisterInputLayout.isErrorEnabled = true
             binding.phoneRegisterInputLayout.error = getString(register_phone_error_hint)
+            false
+        }
+
+    }
+
+    private fun isOtpValid(text:CharSequence?):Boolean{
+
+        return if(!text.isNullOrEmpty()) {
+            binding.otpRegisterInputLayout.isErrorEnabled = false
+            true
+        }else{
+            binding.otpRegisterInputLayout.isErrorEnabled = true
+            binding.otpRegisterInputLayout.error = getString(register_otp_error_hint)
             false
         }
 

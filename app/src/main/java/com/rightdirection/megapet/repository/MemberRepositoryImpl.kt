@@ -63,5 +63,9 @@ class MemberRepositoryImpl(
         return api.postOtpVerification(jwt,otp)
     }
 
+    override suspend fun postRegOtpRequest(phone: ObjPhone): Response<Member> {
+        return api.postRegOtpReqeust(phone)
+    }
+
 
 }
