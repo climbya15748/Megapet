@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Megapet</string>
-    <string name="app_version" translatable="false">Alpha 1.3</string>
+    <string name="app_version" translatable="false">Alpha 1.3.2</string>
     <string name="title_home">主頁</string>
     <string name="title_dashboard">會員</string>
     <string name="title_notifications">網店</string>
@@ -53,7 +53,7 @@
     <string name="edit_info_lastname_hint">姓氏*</string>
     <string name="edit_info_phone_hint">手提電話*</string>
     <string name="edit_info_failure_message_title">系統訊息</string>
-    <string name="edit_info_failure_message_desc">姓氏或名稱不能為空</string>
+    <string name="edit_info_failure_message_desc">名稱不能為空</string>
     <string name="edit_info_submit_btn_text">儲存</string>
     <string name="edit_info_successful">修改賬戶信息成功</string>
         <string name="send_otp_request_successful">驗證碼已傳送至你的電話</string>

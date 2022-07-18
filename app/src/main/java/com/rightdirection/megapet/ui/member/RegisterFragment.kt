@@ -35,6 +35,7 @@ class RegisterFragment : Fragment() {
     val viewModel: RegisterViewModel by viewModels()
     private var _binding : FragmentRegisterBinding ?= null
     private val binding get() = _binding!!
+    private var isDataLoading = false
 
     private lateinit var navController : NavController
 
@@ -47,9 +48,9 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         val signUpBy = arguments?.getString("signUpBy")
 
-        if (signUpBy == "EMAIL"){
-            binding.phoneRegisterInputLayout.hint = getString(register_phone_hint_optional)
-        }
+//        if (signUpBy == "EMAIL"){
+//            binding.phoneRegisterInputLayout.hint = getString(register_phone_hint_optional)
+//        }
         if (signUpBy == "PHONE"){
             binding.registerPhoneVerificationLayout.visibility = View.VISIBLE
             binding.emailRegisterInputLayout.hint = getString(register_email_hint_optional)
@@ -89,8 +90,10 @@ class RegisterFragment : Fragment() {
 
         binding.getMemberOtpBtn.setOnClickListener {
             val isPhoneValid = isPhoneValid(binding.phoneRegisterInput.text)
-            if (isPhoneValid){
-                getOtpViaPhone()
+            if (!isDataLoading){
+                if (isPhoneValid){
+                    getOtpViaPhone()
+                }
             }
         }
 
@@ -102,20 +105,25 @@ class RegisterFragment : Fragment() {
             val isConfirmPasswordValid = isConfirmPasswordValid(binding.confirmPasswordRegisterInput.text)
             val isFirstnameValid = isFirstnameValid(binding.firstnameRegisterInput.text)
             val isLastnameValid = isLastnameValid(binding.lastnameRegisterInput.text)
-            //val isPhoneValid = isPhoneValid(binding.phoneRegisterInput.text)
+            val isPhoneValid = isPhoneValid(binding.phoneRegisterInput.text)
             val isCheckboxChecked = isCheckboxChecked()
             val isOtpValid = isOtpValid(binding.otpRegisterInput.text)
 
-            if (signUpBy == "EMAIL"){
-                if (isEmailValid(binding.emailRegisterInput.text) && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked ){
-                    signUp(signUpBy)
+            if (!isDataLoading){
+                if (signUpBy == "EMAIL"){
+                    if (isEmailValid(binding.emailRegisterInput.text) && isPhoneValid && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked  ){
+                        signUp(signUpBy)
+                    }
                 }
-            }
-            if (signUpBy == "PHONE"){
-                if (isPhoneValid(binding.phoneRegisterInput.text) && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked && isOtpValid ){
-                    signUp(signUpBy)
+                if (signUpBy == "PHONE"){
+                    if (isPhoneValid && isPasswordValid && isConfirmPasswordValid && isFirstnameValid  && isCheckboxChecked && isOtpValid ){
+                        signUp(signUpBy)
+                    }
                 }
+            }else{
+                Log.d("register","please wait, sending registration")
             }
+
 
         }
 
@@ -140,6 +148,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
             }
+            isDataLoading = false
             binding.progressBar.visibility = View.INVISIBLE
         })
 
@@ -170,8 +179,9 @@ class RegisterFragment : Fragment() {
                         toast.show()
                     }
                 }
-                binding.progressBar.visibility = View.INVISIBLE
             }
+            isDataLoading = false
+            binding.progressBar.visibility = View.INVISIBLE
 
         })
 
@@ -206,6 +216,7 @@ class RegisterFragment : Fragment() {
         val body = ObjPhone(binding.phoneRegisterInput.text.toString())
         println("send otp to : $body")
         viewModel.postRegOtpRequest(body)
+        isDataLoading = true
     }
 
     private fun signUp(signUpBy:String?){
@@ -225,6 +236,7 @@ class RegisterFragment : Fragment() {
         )
         Log.d("signUP:","sending form....")
         viewModel.postRegister(form)
+        isDataLoading = true
     }
 
     private fun isEmailValid(text: CharSequence?):Boolean{
@@ -300,7 +312,7 @@ class RegisterFragment : Fragment() {
 
     private fun isPhoneValid(text:CharSequence?):Boolean{
 
-        Log.d("phone:",text?.length.toString())
+        //Log.d("phone:",text?.length.toString())
         return if(!text.isNullOrEmpty() && text.length == 8) {
             binding.phoneRegisterInputLayout.isErrorEnabled = false
             true

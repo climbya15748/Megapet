@@ -34,7 +34,9 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
+//        Glide.with(this).load("https://192.168.50.100/pic/L1.jpg")
+//            .signature(MediaStoreSignature("", System.currentTimeMillis(),0))
+//            .into(binding.homeBanner1)
         Glide.with(this).load(resources.getString(R.string.home_banner_url_1))
             .signature(MediaStoreSignature("", System.currentTimeMillis(),0))
             .into(binding.homeBanner1)
