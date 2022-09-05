@@ -37,65 +37,93 @@ class EditAccountInfoFragment : Fragment() {
 
         binding.progressBar.visibility = View.VISIBLE
 
-        viewModel.memberResponse.observe(viewLifecycleOwner,{memberResponse->
-            if (memberResponse.isSuccessful){
+        viewModel.memberResponse.observe(viewLifecycleOwner) { memberResponse ->
+            if (memberResponse.isSuccessful) {
                 binding.accountInfo = memberResponse.body()
                 //if phone not verified, show phone layout
-                if (binding.accountInfo!!.is_phone_valid == "0"){
+                if (binding.accountInfo!!.is_phone_valid == "0") {
                     binding.editPhoneVerificationLayout.visibility = View.VISIBLE
                     //if sign up by phone , cannot change phone number to prevent duplicate
-                    if (binding.accountInfo!!.sign_up_by == "PHONE"){
+                    if (binding.accountInfo!!.sign_up_by == "PHONE") {
                         binding.editPhoneInput.isFocusable = false
                     }
                 }
-            }else{
-                Log.e("Error:",memberResponse.code().toString())
-                Log.e("Error:",memberResponse.errorBody().toString())
+            } else {
+                Log.e("Error:", memberResponse.code().toString())
+                Log.e("Error:", memberResponse.errorBody().toString())
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
 
 
-        viewModel.updateInfoResponse.observe(viewLifecycleOwner,{
-            if (it.isSuccessful){
-                Toast.makeText(activity, resources.getString(R.string.edit_info_successful),Toast.LENGTH_SHORT).show()
+        viewModel.updateInfoResponse.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    activity,
+                    resources.getString(R.string.edit_info_successful),
+                    Toast.LENGTH_SHORT
+                ).show()
                 navController.navigate(R.id.action_navigation_editAccountInfoFragment_to_navigation_myAccount)
-            }else{
-                Log.e("Error:",it.code().toString())
-                Log.e("Error:",it.errorBody().toString())
+            } else {
+                Log.e("Error:", it.code().toString())
+                Log.e("Error:", it.errorBody().toString())
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
-        viewModel.sendOtpRequestResponse.observe(viewLifecycleOwner,{
-            if (it.isSuccessful){
-                Toast.makeText(activity, resources.getString(R.string.send_otp_request_successful),Toast.LENGTH_LONG).show()
-            }else{
-                if (it.code().toString() == "400"){
-                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_400),Toast.LENGTH_LONG).show()
+        viewModel.sendOtpRequestResponse.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    activity,
+                    resources.getString(R.string.send_otp_request_successful),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                if (it.code().toString() == "400") {
+                    Toast.makeText(
+                        activity,
+                        resources.getString(R.string.send_otp_request_error_400),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-                if (it.code().toString() == "403"){
-                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_403),Toast.LENGTH_LONG).show()
+                if (it.code().toString() == "403") {
+                    Toast.makeText(
+                        activity,
+                        resources.getString(R.string.send_otp_request_error_403),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
-                if (it.code().toString() == "503"){
-                    Toast.makeText(activity, resources.getString(R.string.send_otp_request_error_503),Toast.LENGTH_LONG).show()
+                if (it.code().toString() == "503") {
+                    Toast.makeText(
+                        activity,
+                        resources.getString(R.string.send_otp_request_error_503),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
-        viewModel.sendOtpVerificationResponse.observe(viewLifecycleOwner,{
-            if (it.isSuccessful){
-                Toast.makeText(activity, resources.getString(R.string.verify_otp_successful),Toast.LENGTH_LONG).show()
+        viewModel.sendOtpVerificationResponse.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    activity,
+                    resources.getString(R.string.verify_otp_successful),
+                    Toast.LENGTH_LONG
+                ).show()
                 navController.navigate(R.id.action_navigation_editAccountInfoFragment_to_navigation_myAccount)
-            }else{
-                if (it.code().toString() == "400"){
-                    Toast.makeText(activity, resources.getString(R.string.verify_otp_error),Toast.LENGTH_LONG).show()
+            } else {
+                if (it.code().toString() == "400") {
+                    Toast.makeText(
+                        activity,
+                        resources.getString(R.string.verify_otp_error),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
         //submit btn
 

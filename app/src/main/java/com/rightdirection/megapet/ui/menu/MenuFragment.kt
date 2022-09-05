@@ -49,14 +49,16 @@ class MenuFragment : Fragment(), AdapterView.OnItemClickListener {
         _binding = MenuFragmentBinding.inflate(inflater,container,false)
         val root: View = binding.root
 
-        viewModel.isLogin.observe(viewLifecycleOwner, {
-            if (it){
-                binding.menuListView.adapter = MenuAdapter(requireActivity(), MenuItemData.functionListWithLogin)
-            }else{
-                binding.menuListView.adapter = MenuAdapter(requireActivity(), MenuItemData.functionList)
+        viewModel.isLogin.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.menuListView.adapter =
+                    MenuAdapter(requireActivity(), MenuItemData.functionListWithLogin)
+            } else {
+                binding.menuListView.adapter =
+                    MenuAdapter(requireActivity(), MenuItemData.functionList)
             }
             isLogin = it
-        })
+        }
 
 
         binding.menuListView.onItemClickListener = this

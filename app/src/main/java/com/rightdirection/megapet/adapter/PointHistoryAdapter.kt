@@ -34,7 +34,6 @@ class PointHistoryAdapter (
 
         return view
     }
-
-    }
+}
 
 

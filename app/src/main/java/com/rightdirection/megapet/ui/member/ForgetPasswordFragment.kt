@@ -78,15 +78,15 @@ class ForgetPasswordFragment : Fragment() {
 
         }
 
-        viewModel.forgetPasswordResponse.observe(viewLifecycleOwner,{ it->
-            if (it.isSuccessful){
+        viewModel.forgetPasswordResponse.observe(viewLifecycleOwner) { it ->
+            if (it.isSuccessful) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setMessage(getString(R.string.forget_password_successful))
                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
                         // Respond to positive button press
                     }.show()
                 navController.navigate(R.id.action_navigation_forgetPasswordFragment_to_navigation_memberDashboard)
-            }else{
+            } else {
                 MaterialAlertDialogBuilder(requireContext())
                     .setMessage("網絡錯誤 Network Error .forget-password 500")
                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
@@ -94,7 +94,7 @@ class ForgetPasswordFragment : Fragment() {
                     }.show()
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
         return binding.root
     }

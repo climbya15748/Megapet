@@ -127,55 +127,73 @@ class RegisterFragment : Fragment() {
 
         }
 
-        viewModel.regOtpResponse.observe(viewLifecycleOwner, { response ->
-            if (response.isSuccessful){
-                val toast = Toast.makeText(activity,getString(send_otp_request_successful),Toast.LENGTH_LONG)
+        viewModel.regOtpResponse.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val toast = Toast.makeText(
+                    activity,
+                    getString(send_otp_request_successful),
+                    Toast.LENGTH_LONG
+                )
                 toast.show()
-            }else{
-                Log.d("response body:",response.body().toString())
-                when (response.code().toString()){
-                    "400"->{
+            } else {
+                Log.d("response body:", response.body().toString())
+                when (response.code().toString()) {
+                    "400" -> {
                         binding.phoneRegisterInputLayout.isErrorEnabled = true
-                        binding.phoneRegisterInputLayout.error = getString(send_otp_request_error_400)
+                        binding.phoneRegisterInputLayout.error =
+                            getString(send_otp_request_error_400)
                     }
-                    "403"->{
-                        val toast = Toast.makeText(activity,getString(send_otp_request_error_403),Toast.LENGTH_LONG)
+                    "403" -> {
+                        val toast = Toast.makeText(
+                            activity,
+                            getString(send_otp_request_error_403),
+                            Toast.LENGTH_LONG
+                        )
                         toast.show()
                     }
-                    "503"->{
-                        val toast = Toast.makeText(activity,getString(send_otp_request_error_503),Toast.LENGTH_LONG)
+                    "503" -> {
+                        val toast = Toast.makeText(
+                            activity,
+                            getString(send_otp_request_error_503),
+                            Toast.LENGTH_LONG
+                        )
                         toast.show()
                     }
                 }
             }
             isDataLoading = false
             binding.progressBar.visibility = View.INVISIBLE
-        })
+        }
 
-        viewModel.registrationResponse.observe(viewLifecycleOwner, { response ->
-            if(response.isSuccessful){
-                val toast = Toast.makeText(activity,getString(register_success_201),Toast.LENGTH_LONG)
+        viewModel.registrationResponse.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val toast =
+                    Toast.makeText(activity, getString(register_success_201), Toast.LENGTH_LONG)
                 toast.show()
                 navController.navigate(R.id.action_navigation_register_to_navigation_memberDashboard)
 
-            }else{
+            } else {
                 //Log.d("error body:",response.toString())
-                Log.d("response body:",response.body().toString())
-                when (response.code().toString()){
-                    "400"->{
+                Log.d("response body:", response.body().toString())
+                when (response.code().toString()) {
+                    "400" -> {
                         binding.emailRegisterInputLayout.isErrorEnabled = true
                         binding.emailRegisterInputLayout.error = getString(register_error_400)
                     }
-                    "401"->{
+                    "401" -> {
                         binding.phoneRegisterInputLayout.isErrorEnabled = true
                         binding.phoneRegisterInputLayout.error = getString(register_error_401)
                     }
-                    "403"->{
+                    "403" -> {
                         binding.otpRegisterInputLayout.isErrorEnabled = true
                         binding.otpRegisterInputLayout.error = getString(verify_otp_error)
                     }
-                    "503"->{
-                        val toast = Toast.makeText(activity,getString(register_error_503),Toast.LENGTH_LONG)
+                    "503" -> {
+                        val toast = Toast.makeText(
+                            activity,
+                            getString(register_error_503),
+                            Toast.LENGTH_LONG
+                        )
                         toast.show()
                     }
                 }
@@ -183,7 +201,7 @@ class RegisterFragment : Fragment() {
             isDataLoading = false
             binding.progressBar.visibility = View.INVISIBLE
 
-        })
+        }
 
         val ss = SpannableString(getString(register_i_agree_text)).toSpannable()
         val sharedPreference = requireActivity().getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)

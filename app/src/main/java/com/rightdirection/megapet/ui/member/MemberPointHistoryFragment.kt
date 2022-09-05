@@ -40,33 +40,33 @@ class MemberPointHistoryFragment : Fragment() {
         _binding = FragmentMemberPointHistoryBinding.inflate(inflater, container, false)
 
 
-        viewModel.isLogin.observe(viewLifecycleOwner, { haveToken->
-            if (!haveToken){
+        viewModel.isLogin.observe(viewLifecycleOwner) { haveToken ->
+            if (!haveToken) {
                 navController.navigate(R.id.action_navigation_memberPaymentScanFragment_to_navigation_memberDashboard)
-            }else{
+            } else {
                 binding.progressBar.visibility = View.VISIBLE
                 viewModel.getPointHistory()
-                viewModel.pointHistoryResponse.observe(viewLifecycleOwner,{ response->
-                    if (response.isSuccessful){
-                        Log.d("pointHistoryResponse",response.body().toString())
-                        if(response.body() == null){
+                viewModel.pointHistoryResponse.observe(viewLifecycleOwner) { response ->
+                    if (response.isSuccessful) {
+                        Log.d("pointHistoryResponse", response.body().toString())
+                        if (response.body() == null) {
                             binding.noPointHistoryText.visibility = View.VISIBLE
-                        }else{
+                        } else {
                             binding.pointHistoryListView.adapter =
                                 response.body()?.let { PointHistoryAdapter(requireActivity(), it) }
                         }
-                    }else{
-                        if (response.code().toString() == "401"){
+                    } else {
+                        if (response.code().toString() == "401") {
                             navController.navigate(R.id.navigation_editAccountInfoFragment)
                         }
 
-                        Log.e("Error:",response.code().toString())
-                        Log.e("Error:",response.body().toString())
+                        Log.e("Error:", response.code().toString())
+                        Log.e("Error:", response.body().toString())
                     }
                     binding.progressBar.visibility = View.INVISIBLE
-                })
+                }
             }
-        })
+        }
 
 
 

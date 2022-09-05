@@ -75,11 +75,11 @@ class DashboardFragment : Fragment() {
         }
 
 
-        preference.emailFlow.asLiveData().observe(viewLifecycleOwner, { email ->
-            if (!email.isNullOrEmpty()){
+        preference.emailFlow.asLiveData().observe(viewLifecycleOwner) { email ->
+            if (!email.isNullOrEmpty()) {
                 binding.loginEmailInput.setText(email)
             }
-        })
+        }
 
         preference.passwordFlow.asLiveData().observe(viewLifecycleOwner, Observer { password->
             if (!password.isNullOrEmpty()){
@@ -87,8 +87,8 @@ class DashboardFragment : Fragment() {
             }
         })
 
-        viewModel.loginResponse.observe(viewLifecycleOwner,{ response->
-            if (response.isSuccessful){
+        viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
                 val loginResponseBody = response.body()!!
                 //Log.d("login",loginResponseBody!!.login_token.toString())
                 viewModel.saveAuthToken(
@@ -99,19 +99,19 @@ class DashboardFragment : Fragment() {
 
                 navController.navigate(R.id.action_navigation_member_dashboard_to_myAccountFragment)
 
-            }else{
-                Log.d("error body:",response.toString())
+            } else {
+                Log.d("error body:", response.toString())
 
                 MaterialAlertDialogBuilder(requireContext())
-                .setMessage(resources.getString(R.string.login_failure_message_desc))
-                .setPositiveButton(resources.getString(R.string.ok)) { _, _ ->
-                    // Respond to positive button press
-                }.show()
+                    .setMessage(resources.getString(R.string.login_failure_message_desc))
+                    .setPositiveButton(resources.getString(R.string.ok)) { _, _ ->
+                        // Respond to positive button press
+                    }.show()
             }
 
             binding.progressBar.visibility = View.INVISIBLE
 
-        })
+        }
 
 
 

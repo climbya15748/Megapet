@@ -40,16 +40,15 @@ class MyAccountFragment : Fragment() {
 
         binding.progressBar.visibility = View.VISIBLE
 
-        viewModel.memberResponse.observe(viewLifecycleOwner,{memberResponse->
-            if (memberResponse.isSuccessful){
+        viewModel.memberResponse.observe(viewLifecycleOwner) { memberResponse ->
+            if (memberResponse.isSuccessful) {
                 binding.accountInfo = memberResponse.body()
-            }else{
-                Log.e("Error:",memberResponse.code().toString())
-                Log.e("Error:",memberResponse.body().toString())
+            } else {
+                Log.e("Error:", memberResponse.code().toString())
+                Log.e("Error:", memberResponse.body().toString())
             }
             binding.progressBar.visibility = View.INVISIBLE
-        })
-
+        }
 
 
 //        loginPreference.jwtFlow.asLiveData().observe(viewLifecycleOwner, Observer { jwt->
